@@ -1,0 +1,35 @@
+---
+- hosts: all
+  become: true
+  gather_facts: yes
+  remote_user: ansible
+  vars:
+   Name: Srinivas
+   Location: Hyderabad
+   Age: 22
+   Food: Rice & Curry
+   Skintone: White
+   Degree: B.Tech
+  tasks:
+   - name: Install HTTP Server
+     tags:
+      - Install
+     yum:
+      name: httpd
+      state: latest
+   - name: Copy the Index.html file
+     tags:
+      - Change   
+     template:
+      src: /home/ansible/playbook/index.html
+      dest: /var/www/html/index.html
+     notify:
+      - Restart the HTTP Server
+  handlers:    
+   - name: Restart the HTTP Server
+     tags:
+      - Restart
+     service:
+      name: httpd
+      state: restarted
+...

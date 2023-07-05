@@ -1,0 +1,19 @@
+---
+- hosts: all
+  become: true
+  gather_facts: yes
+  remote_user: ansible
+  tasks:
+   - name: Install HTTP Server
+     yum:
+      name: httpd
+      state: latest
+   - name: Starting HTTP Server
+     service:
+      name: httpd
+      state: started
+   - name: Copy the Index.html file
+     copy:
+      src: /home/ansible/playbook/index.html
+      dest: /var/www/html/index.html
+...

@@ -1,0 +1,26 @@
+---
+- hosts: all
+  become: true
+  gather_facts: yes
+  remote_user: ansible
+  vars:
+   Name: KRS Srinivas
+   Location: Hyderabad
+   Age: 22
+   Food: Rice & Curry
+   Skintone: Brown
+   Degree: B.Tech
+  tasks:
+   - name: Install HTTP Server
+     yum:
+      name: httpd
+      state: latest
+   - name: Starting HTTP Server
+     service:
+      name: httpd
+      state: started
+   - name: Copy the Index.html file
+     template:
+      src: /home/ansible/playbook/index.html
+      dest: /var/www/html/index.html
+...

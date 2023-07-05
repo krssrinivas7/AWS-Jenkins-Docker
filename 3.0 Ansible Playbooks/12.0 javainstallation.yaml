@@ -1,0 +1,32 @@
+---
+- hosts: all
+  become: true
+  gather_facts: yes
+  remote_user: ansible
+  tasks:
+   - name: Get the Java Version
+     shell:
+      javac -version | awk '{print $2}'
+     register: 
+      javaversion
+     ignore_errors: yes
+   - name: Display Java Version
+     when:
+      javaversion.stdout == ""
+     debug:
+      msg: "Java not Installed"
+   - name: Installing java
+     yum:
+      name: java-11-openjdk-devel
+      state: latest
+   - name: Get the Java Version
+     shell:
+      javac -version | awk '{print $2}'
+     register:
+      javaversion
+   - name: Display Java Version
+     when:
+      javaversion.stdout != ""
+     debug:
+      msg: "Java is installed and Version is {{javaversion.stdout}}"
+...

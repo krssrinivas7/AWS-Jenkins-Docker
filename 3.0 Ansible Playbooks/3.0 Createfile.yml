@@ -1,0 +1,11 @@
+---
+- hosts: all
+  become: true
+  gather_facts: yes
+  remote_user: ansible
+  tasks:
+   - name: Creating a file
+     file:
+      path: /tmp/srinivas.txt
+      state: touch
+...

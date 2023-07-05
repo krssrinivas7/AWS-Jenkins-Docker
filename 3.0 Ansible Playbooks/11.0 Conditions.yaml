@@ -1,0 +1,13 @@
+---
+- hosts: all
+  gather_facts: yes
+  become: true
+  remote_user: ansible
+  tasks:
+   - name: install HTTP Server
+     yum:
+      name: httpd
+      state: latest
+     when:
+      - ansible_distribution=="RedHat"
+...

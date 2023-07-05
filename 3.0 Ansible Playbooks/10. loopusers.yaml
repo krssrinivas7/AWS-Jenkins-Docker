@@ -1,0 +1,16 @@
+---
+- hosts: all
+  gather_facts: yes
+  become: true
+  remote_user: ansible
+  tasks:
+   - name: Crating Users
+     user:
+      name: "{{item.username}}"
+      create_home: "{{item.createhome}}"
+     with_items:
+      - {'username': 'srinivas', 'createhome': 'no'}
+      - {'username': 'akshay', 'createhome': 'yes'}
+      - {'username': 'manoj', 'createhome': 'no'}
+      - {'username': 'madhan', 'createhome': 'yes'}
+...

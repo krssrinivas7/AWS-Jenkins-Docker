@@ -1,0 +1,80 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>in.krssrinivas</groupId>
+  <artifactId>KRS-maven-web-app</artifactId>
+  <packaging>war</packaging>
+  <version>1.0-SNAPSHOT</version>
+  <name>KRS-maven-web-app</name>
+  <url>http://maven.apache.org</url>
+
+  <properties>
+	<jdk.version>1.8</jdk.version>
+	<spring.version>5.1.2.RELEASE</spring.version>
+	<junit.version>4.11</junit.version>
+	<log4j.version>1.2.17</log4j.version>
+	<sonar.host.url>http://18.118.188.118:9000/</sonar.host.url>
+	<sonar.login>admin</sonar.login>
+	<sonar.password>srinivas</sonar.password> 
+	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+  </properties>
+  
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+    </dependency>
+  </dependencies>
+
+  <distributionManagement>
+	
+	<repository>
+	  <id>nexus</id>
+	  <name>KRS Srinivas Release Nexus Repository</name>
+	  <url>http://18.118.160.212:8081/repository/krss-release/</url>
+    </repository>
+	    
+	<snapshotRepository>
+	  <id>nexus</id>
+	  <name>KRS Srinivas Snapshot Nexus Repository </name>
+	  <url>http://18.118.160.212:8081/repository/krss-snapshot/</url>
+    </snapshotRepository>
+	    
+  </distributionManagement>
+  
+  <build>
+    <finalName>KRS-maven-web-app</finalName>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-war-plugin</artifactId>
+        <version>3.3.1</version>
+      </plugin>
+	  <plugin>
+	    <groupId>org.eclipse.jetty</groupId>
+		<artifactId>jetty-maven-plugin</artifactId>
+		<version>9.2.11.v20150529</version>
+		<configuration>
+		 <scanIntervalSeconds>10</scanIntervalSeconds>
+		 <webApp>
+		  <contextPath>/KRS-maven-web-app</contextPath>
+		 </webApp>
+		</configuration>
+	   </plugin>
+	   <plugin>
+	     <groupId>org.apache.maven.plugins</groupId>
+		 <artifactId>maven-eclipse-plugin</artifactId>
+		 <version>2.9</version>
+		 <configuration>
+		  <downloadSources>true</downloadSources>
+		  <downloadJavadocs>true</downloadJavadocs>
+		  <wtpversion>2.0</wtpversion>
+		  <wtpContextName>KRS-maven-web-app</wtpContextName>
+		 </configuration>
+	   </plugin>    
+    </plugins>
+  </build>
+</project>

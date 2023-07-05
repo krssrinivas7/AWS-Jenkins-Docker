@@ -1,0 +1,12 @@
+---
+- hosts: all
+  become: true
+  gather_facts: yes
+  remote_user: ansible
+  vars:
+   Name: Srinivas
+  tasks:
+   - name: Debug Example
+     debug:
+      msg: "My Name is {{Name}}"
+...

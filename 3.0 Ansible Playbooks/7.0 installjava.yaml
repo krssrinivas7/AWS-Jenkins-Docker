@@ -1,0 +1,18 @@
+--- 
+- hosts: all
+  become: true
+  gather_facts: yes
+  remote_user: ansible
+  tasks:
+   - name: Install Java 
+     yum:
+      name: "{{javapackageversion}}"
+   - name: Get Java Version
+     shell:
+      java -version 2>&1 | grep version | awk '{print $3}' | sed 's/"//g'
+     register:
+      javaversion
+   - name:
+     debug:
+      var: javaversion.stdout
+...

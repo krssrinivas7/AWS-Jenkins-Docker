@@ -1,1 +1,0 @@
-ls -l | awk '{print $9}'
